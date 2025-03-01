@@ -1,0 +1,22 @@
+﻿@model AmazonSA.Models.Product
+@{
+    ViewData["Title"] = "Place Order";
+}
+<h2 class="text-center my-4">Order: @Model.Name</h2>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<form method="post" action="/Order/ConfirmOrder">
+    <input type="hidden" name="productId" value="@Model.ProductID" />
+    <input type="hidden" name="userId" value="1" />
+
+    <div class="form-group">
+        <label>Quantity</label>
+        <input type="number" name="quantity" class="form-control" min="1" max="@Model.StockQuantity" required />
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Confirm Order</button>
+</form>

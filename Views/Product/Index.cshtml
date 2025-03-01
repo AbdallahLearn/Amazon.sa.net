@@ -1,0 +1,73 @@
+﻿<style>
+    /* Set fixed size for all cards */
+    .card {
+        height: 100%; /* Ensures all cards are the same height */
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Set uniform image size without cropping */
+    .card-img-top {
+        width: 100%;
+        height: 250px; /* Fixed height */
+        object-fit: contain; /* Ensures full image is visible without cropping */
+        background-color: #f8f8f8; /* Optional: Adds background for images with transparency */
+    }
+
+    /* Ensures uniform height for card body */
+    .card-body {
+        flex-grow: 1; /* Expands to make all cards equal height */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    /* Media Query for screens ≤ 760px */
+    @@media (max-width: 760px) {
+        .vh-100 {
+            height: 230vh !important; /* Change height to 200px */
+        }
+    }
+</style>
+
+@model List<AmazonSA.Models.Product>
+@{
+    ViewData["Title"] = "Products";
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<div class="vh-100 container-fluid">
+    <h2 class="text-center my-4">Product List</h2>
+    <div class="container">
+        <div class="row">
+            @foreach (var product in Model)
+            {
+                <div class="col-md-4 col-sm-6 d-flex gap-5">
+                    <div class="card mb-4 w-100">
+                        <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name">
+                        <div class="card-body">
+                            <h5 class="card-title">@product.Name</h5>
+                            <p class="card-text">@product.Category</p>
+                            <p class="card-text"><strong>@product.StockQuantity</strong> in stock</p>
+                            <p class="card-text fs-4"><strong>@product.Price</strong> SAR</p>
+
+                            <form action="/Order/Create" method="get">
+                                <input type="hidden" name="productId" value="@product.ProductID">
+                                <button type="submit" class="btn text-dark w-100" style="background-color:#ffd814">Order Now</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+# Visual Studio-specific files
+.vs/
+*.user
+*.suo
+*.vscode/
+
+# Build outputs
+bin/
+obj/
+
+# User-specific files
+*.rsuser
+*.sln.docstates
+
+# Logs and debug
+*.log
+*.tlog
+
+# Rider and JetBrains
+.idea/
+*.sln.iml
+
+# macOS
+.DS_Store
+
+# Windows Thumbs.db
+Thumbs.db
+
+# Node.js files (if using npm)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Environment variables
+.env
+secrets.json
+
+# NuGet Packages
+*.nupkg
+packages/
+project.lock.json
+
+# Database and migrations
+*.mdf
+*.ldf
+Migrations/
+
+# Publish output
+wwwroot/
+app.publish/
